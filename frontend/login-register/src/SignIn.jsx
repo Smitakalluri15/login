@@ -11,14 +11,26 @@ export default function SignIn() {
     e.preventDefault()
     axios.post('http://localhost:5000/signin',{email,password})
     .then(result => {
-      if(result.data=='Success'){
-        alert('Given access')
-      }
-    console.log(result)
-    alert('registered successfully')
+      if (result.data === 'Success') {
+  alert('Login successful')
+  navigate('/home') // if you have a home page
+} else {
+  alert(result.data)
+}
+
     })
     .catch(err => console.log(err))
     }
+
+    /*
+    if (result.data === 'Success') {
+  alert('Login successful')
+  navigate('/home') // if you have a home page
+} else {
+  alert(result.data)
+}
+
+    */
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -46,6 +58,7 @@ export default function SignIn() {
                 name="email"
                 type="email"
                 required
+                onChange={(e)=>setEmail(e.target.value)}
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>
@@ -62,6 +75,7 @@ export default function SignIn() {
                 name="password"
                 type="password"
                 required
+                onChange={(e)=>setPassword(e.target.value)}
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
             </div>

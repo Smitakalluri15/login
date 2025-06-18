@@ -7,9 +7,21 @@ export default function SignUp() {
   const [name,setName] = useState()
   const [email,setEmail] = useState()
   const [password,setPassword] = useState()
+
+  const isStrongPassword = (password) => {
+  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+  return strongRegex.test(password)
+}
+
+
   const navigate = useNavigate()
     const handleSubmit = (e) =>{
       e.preventDefault()
+      console.log({ name, email, password })
+      if (!isStrongPassword(password)) {
+    alert("Password must have at least:\n- 8 characters\n- 1 uppercase\n- 1 lowercase\n- 1 number\n- 1 special character")
+    return
+  }
       axios.post('http://localhost:5000/signup',{name,email,password})
       .then(result => {
         console.log(result)
