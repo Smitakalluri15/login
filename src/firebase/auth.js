@@ -1,3 +1,5 @@
+// src/firebase/auth.js
+import { auth } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -6,30 +8,34 @@ import {
   sendPasswordResetEmail,
   signOut
 } from "firebase/auth";
-import { auth } from "./firebase";
 
-// Email/password sign up
-export const doCreateUserWithEmailAndPassword = (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password);
-};
+/**
+ * Sign up with email and password
+ */
+export const doCreateUserWithEmailAndPassword = (email, password) =>
+  createUserWithEmailAndPassword(auth, email, password);
 
-// Email/password login
-export const doSignInWithEmailAndPassword = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
-};
+/**
+ * Sign in with email and password
+ */
+export const doSignInWithEmailAndPassword = (email, password) =>
+  signInWithEmailAndPassword(auth, email, password);
 
-// Google Sign-In
+/**
+ * Sign in with Google popup
+ */
 export const doSignInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   return signInWithPopup(auth, provider);
 };
 
-// Forgot Password
-export const doPasswordReset = (email) => {
-  return sendPasswordResetEmail(auth, email);
-};
+/**
+ * Send password reset email
+ */
+export const doPasswordReset = (email) =>
+  sendPasswordResetEmail(auth, email);
 
-// Logout
-export const doSignOut = () => {
-  return signOut(auth);
-};
+/**
+ * Sign out current user
+ */
+export const doSignOut = () => signOut(auth);
